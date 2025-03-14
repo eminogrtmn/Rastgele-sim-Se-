@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-B Emin ÇALAN @ECS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E0F7FA;
+            color: #00695C;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        button {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #randomButton {
+            background-color: #00796B;
+            color: white;
+        }
+        .groupButton {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .teamButton {
+            background-color: #FF9800;
+            color: white;
+        }
+        #clearButton {
+            background-color: #FFB300;
+            color: black;
+        }
+        #exitButton {
+            background-color: #D32F2F;
+            color: white;
+        }
+        #selectedName {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        #nameList {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            width: 300px;
+            text-align: left;
+        }
+        #nameList li {
+            background-color: #FFF3E0;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #00796C;
+        }
+        .groupList {
+            margin: 20px auto;
+            width: 90%;
+            text-align: left;
+        }
+        .groupList h3 {
+            font-size: 18px;
+            color: #004D40;
+        }
+        .groupContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .groupBox {
+            border: 2px solid #00796C;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #FFF3E0;
+            width: calc(33.33% - 40px);
+            box-sizing: border-box;
+        }
+        .groupBox h4 {
+            font-size: 16px;
+            color: #004D40;
+            margin: 0 0 10px 0;
+        }
+        .groupBox ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .groupBox li {
+            font-size: 14px;
+            color: #00796C;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rastgele İsim Seçimi ve Gruplar Oluşturma</h1>
+
+    <!-- Rastgele İsim Seç Butonu -->
+    <div>
+        <button id="randomButton" onclick="selectRandomName()">Rastgele İsim Seç</button>
+    </div>
+
+    <!-- Grup Oluştur Butonları -->
+    <div>
+        <button class="groupButton" onclick="createGroups(2)">2'li Grup Oluştur</button>
+        <button class="groupButton" onclick="createGroups(3)">3'lü Grup Oluştur</button>
+        <button class="groupButton" onclick="createGroups(4)">4'lü Grup Oluştur</button>
+    </div>
+
+    <!-- Takım Oluştur Butonları -->
+    <div>
+        <button class="teamButton" onclick="createTeams(4)">4 Takım Oluştur</button>
+        <button class="teamButton" onclick="createTeams(5)">5 Takım Oluştur</button>
+        <button class="teamButton" onclick="createTeams(6)">6 Takım Oluştur</button>
+    </div>
+
+    <!-- Temizle ve Çıkış Butonları -->
+    <div>
+        <button id="clearButton" onclick="clearList()">Temizle</button>
+        <button id="exitButton" onclick="exitApp()">ÇIKIŞ</button>
+    </div>
+
+    <!-- Seçilen İsim ve Grupların Gösterileceği Alan -->
+    <div id="selectedName"></div>
+    <ul id="nameList"></ul>
+    <div id="groupContainer" class="groupList"></div>
+
+    <script>
+        const names = ['ADAR ÖZKAYA', 'SALMAN S.K. SEYAM', 'ARAS KOZCA', 'BETÜL KAYA', 'BARIŞ ÇAR', 
+                       'BELİNAY CANİKLİ', 'EFE ENSAR UTANĞAÇ', 'ELİF DEVA GÜLERTAŞ', 'EMİN ASAF KOLU', 
+                       'ERDEM AKCA', 'EYMEN ÜLKÜ', 'HÜMEYRA AYŞE ÇAR', 'İKRA NİSAN DALDAL', 
+                       'İKRA SILA YALNIZ', 'KAYRA GÖKTEPE', 'YİĞİT ALİ LİMONCU', 
+                       'LÜTFİYE NİĞDA ERDEMİR', 'MERVE DALLI', 'MUHAMMED ATABEY NİŞANCI', 
+                       'MUHAMMED ENSAR DEĞİRMENCİ', 'NAİM ALPARSLAN ÖZTÜRK', 'POYRAZ MADENCİ', 
+                       'TUANA EBRAR DÜNDAR', 'YİĞİT EREN', 'YUSUF TAHA BUDAK', 'ZÜMRA HORASAN', 'ZENDA ROJ ACAR'];
+        let remainingNames = [...names];
+
+        // Rastgele isim seçme fonksiyonu
+        function selectRandomName() {
+            if (remainingNames.length > 0) {
+                const randomIndex = Math.floor(Math.random() * remainingNames.length);
+                const selectedName = remainingNames[randomIndex];
+                document.getElementById('selectedName').innerText = selectedName;
+                const listItem = document.createElement('li');
+                listItem.innerText = selectedName;
+                document.getElementById('nameList').prepend(listItem);
+                remainingNames.splice(randomIndex, 1);
+            } else {
+                alert('Tüm isimler seçildi!');
+            }
+        }
+
+        // Grup oluşturma fonksiyonu
+        function createGroups(groupSize) {
+            if (remainingNames.length < groupSize) {
+                alert(`En az ${groupSize} isim gereklidir!`);
+                return;
+            }
+
+            const shuffledNames = shuffleArray([...remainingNames]);
+            const groups = [];
+            while (shuffledNames.length > 0) {
+                groups.push(shuffledNames.splice(0, groupSize));
+            }
+
+            displayGroups(groups, `${groupSize}'li Gruplar`);
+        }
+
+        // Takım oluşturma fonksiyonu
+        function createTeams(teamCount) {
+            if (remainingNames.length < teamCount) {
+                alert(`En az ${teamCount} isim gereklidir!`);
+                return;
+            }
+
+            const shuffledNames = shuffleArray([...remainingNames]);
+            const teams = Array.from({ length: teamCount }, () => []);
+
+            for (let i = 0; i < shuffledNames.length; i++) {
+                teams[i % teamCount].push(shuffledNames[i]);
+            }
+
+            displayGroups(teams, `${teamCount} Takım`);
+        }
+
+        // Grupları veya takımları ekranda gösterme fonksiyonu
+        function displayGroups(groups, title) {
+            const groupContainer = document.getElementById('groupContainer');
+            groupContainer.innerHTML = `<h3>${title}</h3>`;
+            const container = document.createElement('div');
+            container.className = 'groupContainer';
+
+            groups.forEach((group, index) => {
+                const groupBox = document.createElement('div');
+                groupBox.className = 'groupBox';
+                groupBox.innerHTML = `<h4>Grup ${index + 1}</h4><ul></ul>`;
+                group.forEach(name => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = name;
+                    groupBox.querySelector('ul').appendChild(listItem);
+                });
+                container.appendChild(groupBox);
+            });
+
+            groupContainer.appendChild(container);
+        }
+
+        // Diziyi karıştırma fonksiyonu
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Listeyi temizleme fonksiyonu
+        function clearList() {
+            remainingNames = [...names];
+            document.getElementById('selectedName').innerText = '';
+            document.getElementById('nameList').innerHTML = '';
+            document.getElementById('groupContainer').innerHTML = '';
+            alert('Liste temizlendi!');
+        }
+
+        // Uygulamadan çıkış fonksiyonu
+        function exitApp() {
+            window.close();
+        }
+    </script>
+</body>
+</html>
