@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1-B Emin ÇALAN @ECS</title>
+    <title>1-B Emin Ã‡ALAN @ECS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -107,13 +107,13 @@
     </style>
 </head>
 <body>
-    <h1>Rastgele Ýsim Seçimi ve Gruplar Oluþturma</h1>
+    <h1>Rastgele Ä°sim SeÃ§imi ve Gruplar OluÅŸturma</h1>
 
-    <!-- Süre Seçimi -->
+    <!-- SÃ¼re SeÃ§imi -->
     <div>
-        <label for="timeInterval">Süre Seçin:</label>
+        <label for="timeInterval">SÃ¼re SeÃ§in:</label>
         <select id="timeInterval">
-            <option value="0">Süresiz</option>
+            <option value="0">SÃ¼resiz</option>
             <option value="5">5 Saniye</option>
             <option value="10">10 Saniye</option>
             <option value="15">15 Saniye</option>
@@ -129,32 +129,32 @@
         </select>
     </div>
 
-    <!-- Rastgele Ýsim Seç Butonu -->
+    <!-- Rastgele Ä°sim SeÃ§ Butonu -->
     <div>
-        <button id="randomButton" onclick="selectRandomName()">Rastgele Ýsim Seç</button>
+        <button id="randomButton" onclick="selectRandomName()">Rastgele Ä°sim SeÃ§</button>
     </div>
 
-    <!-- Grup Oluþtur Butonlarý -->
+    <!-- Grup OluÅŸtur ButonlarÄ± -->
     <div>
-        <button class="groupButton" onclick="createGroups(2)">2'li Grup Oluþtur</button>
-        <button class="groupButton" onclick="createGroups(3)">3'lü Grup Oluþtur</button>
-        <button class="groupButton" onclick="createGroups(4)">4'lü Grup Oluþtur</button>
+        <button class="groupButton" onclick="createGroups(2)">2'li Grup OluÅŸtur</button>
+        <button class="groupButton" onclick="createGroups(3)">3'lÃ¼ Grup OluÅŸtur</button>
+        <button class="groupButton" onclick="createGroups(4)">4'lÃ¼ Grup OluÅŸtur</button>
     </div>
 
-    <!-- Takým Oluþtur Butonlarý -->
+    <!-- TakÄ±m OluÅŸtur ButonlarÄ± -->
     <div>
-        <button class="teamButton" onclick="createTeams(4)">4 Takým Oluþtur</button>
-        <button class="teamButton" onclick="createTeams(5)">5 Takým Oluþtur</button>
-        <button class="teamButton" onclick="createTeams(6)">6 Takým Oluþtur</button>
+        <button class="teamButton" onclick="createTeams(4)">4 TakÄ±m OluÅŸtur</button>
+        <button class="teamButton" onclick="createTeams(5)">5 TakÄ±m OluÅŸtur</button>
+        <button class="teamButton" onclick="createTeams(6)">6 TakÄ±m OluÅŸtur</button>
     </div>
 
-    <!-- Temizle ve Çýkýþ Butonlarý -->
+    <!-- Temizle ve Ã‡Ä±kÄ±ÅŸ ButonlarÄ± -->
     <div>
         <button id="clearButton" onclick="clearList()">Temizle</button>
-        <button id="exitButton" onclick="exitApp()">ÇIKIÞ</button>
+        <button id="exitButton" onclick="exitApp()">Ã‡IKIÅž</button>
     </div>
 
-    <!-- Seçilen Ýsim ve Gruplarýn Gösterileceði Alan -->
+    <!-- SeÃ§ilen Ä°sim ve GruplarÄ±n GÃ¶sterileceÄŸi Alan -->
     <div id="selectedName"></div>
     <ul id="nameList"></ul>
     <div id="groupContainer" class="groupList"></div>
@@ -163,13 +163,13 @@
     <audio id="bellSound" src="bell.mp3"></audio>
 
     <script>
-        const names = ['ADAR ÖZKAYA', 'SALMAN S.K. SEYAM', 'ARAS KOZCA', 'BETÜL KAYA', 'BARIÞ ÇAR', 
-                       'BELÝNAY CANÝKLÝ', 'EFE ENSAR UTANÐAÇ', 'ELÝF DEVA GÜLERTAÞ', 'EMÝN ASAF KOLU', 
-                       'ERDEM AKCA', 'EYMEN ÜLKÜ', 'HÜMEYRA AYÞE ÇAR', 'ÝKRA NÝSAN DALDAL', 
-                       'ÝKRA SILA YALNIZ', 'KAYRA GÖKTEPE', 'YÝÐÝT ALÝ LÝMONCU', 
-                       'LÜTFÝYE NÝÐDA ERDEMÝR', 'MERVE DALLI', 'MUHAMMED ATABEY NÝÞANCI', 
-                       'MUHAMMED ENSAR DEÐÝRMENCÝ', 'NAÝM ALPARSLAN ÖZTÜRK', 'POYRAZ MADENCÝ', 
-                       'TUANA EBRAR DÜNDAR', 'YÝÐÝT EREN', 'YUSUF TAHA BUDAK', 'ZÜMRA HORASAN', 'ZENDA ROJ ACAR'];
+        const names = ['ADAR Ã–ZKAYA', 'SALMAN S.K. SEYAM', 'ARAS KOZCA', 'BETÃœL KAYA', 'BARIÅž Ã‡AR', 
+                       'BELÄ°NAY CANÄ°KLÄ°', 'EFE ENSAR UTANÄžAÃ‡', 'ELÄ°F DEVA GÃœLERTAÅž', 'EMÄ°N ASAF KOLU', 
+                       'ERDEM AKCA', 'EYMEN ÃœLKÃœ', 'HÃœMEYRA AYÅžE Ã‡AR', 'Ä°KRA NÄ°SAN DALDAL', 
+                       'Ä°KRA SILA YALNIZ', 'KAYRA GÃ–KTEPE', 'YÄ°ÄžÄ°T ALÄ° LÄ°MONCU', 
+                       'LÃœTFÄ°YE NÄ°ÄžDA ERDEMÄ°R', 'MERVE DALLI', 'MUHAMMED ATABEY NÄ°ÅžANCI', 
+                       'MUHAMMED ENSAR DEÄžÄ°RMENCÄ°', 'NAÄ°M ALPARSLAN Ã–ZTÃœRK', 'POYRAZ MADENCÄ°', 
+                       'TUANA EBRAR DÃœNDAR', 'YÄ°ÄžÄ°T EREN', 'YUSUF TAHA BUDAK', 'ZÃœMRA HORASAN', 'ZENDA ROJ ACAR'];
         let remainingNames = [...names];
         let intervalId = null;
 
@@ -196,9 +196,9 @@
                 listItem.innerText = selectedName;
                 document.getElementById('nameList').prepend(listItem);
                 remainingNames.splice(randomIndex, 1);
-                document.getElementById('bellSound').play(); // Zil sesi çal
+                document.getElementById('bellSound').play(); // Zil sesi Ã§al
             } else {
-                alert('Tüm isimler seçildi!');
+                alert('TÃ¼m isimler seÃ§ildi!');
                 stopInterval();
             }
         }
@@ -238,7 +238,7 @@
                 teams[i % teamCount].push(shuffledNames[i]);
             }
 
-            displayGroups(teams, `${teamCount} Takým`);
+            displayGroups(teams, `${teamCount} TakÄ±m`);
         }
 
         function displayGroups(groups, title) {
