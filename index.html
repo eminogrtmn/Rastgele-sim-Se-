@@ -129,9 +129,12 @@
         </select>
     </div>
 
-    <!-- Rastgele İsim Seç Butonu -->
+    <!-- Rastgele İsim Seç Butonu ve Seslendir Tik Kutusu -->
     <div>
         <button id="randomButton" onclick="selectRandomName()">Rastgele İsim Seç</button>
+        <label>
+            <input type="checkbox" id="speakCheckbox"> Seslendir
+        </label>
     </div>
 
     <!-- Grup Oluştur Butonları -->
@@ -197,10 +200,21 @@
                 document.getElementById('nameList').prepend(listItem);
                 remainingNames.splice(randomIndex, 1);
                 document.getElementById('bellSound').play(); // Zil sesi çal
+
+                // Seslendir tik kutusu işaretliyse ismi seslendir
+                if (document.getElementById('speakCheckbox').checked) {
+                    speakText(selectedName);
+                }
             } else {
                 alert('Tüm isimler seçildi!');
                 stopInterval();
             }
+        }
+
+        function speakText(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'tr-TR'; // Türkçe seslendirme için dil ayarı
+            speechSynthesis.speak(utterance);
         }
 
         document.getElementById('timeInterval').addEventListener('change', function() {
