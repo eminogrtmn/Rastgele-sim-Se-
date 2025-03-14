@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1-B Emin Ã‡ALAN @ECS</title>
+    <title>1-B Emin ÇALAN @ECS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,7 +47,7 @@
             color: white;
         }
         #selectedName {
-            font-size: 18px;
+            font-size: 36px;
             font-weight: bold;
             margin: 20px 0;
         }
@@ -107,49 +107,86 @@
     </style>
 </head>
 <body>
-    <h1>Rastgele Ä°sim SeÃ§imi ve Gruplar OluÅŸturma</h1>
+    <h1>Rastgele Ýsim Seçimi ve Gruplar Oluþturma</h1>
 
-    <!-- Rastgele Ä°sim SeÃ§ Butonu -->
+    <!-- Süre Seçimi -->
     <div>
-        <button id="randomButton" onclick="selectRandomName()">Rastgele Ä°sim SeÃ§</button>
+        <label for="timeInterval">Süre Seçin:</label>
+        <select id="timeInterval">
+            <option value="0">Süresiz</option>
+            <option value="5">5 Saniye</option>
+            <option value="10">10 Saniye</option>
+            <option value="15">15 Saniye</option>
+            <option value="30">30 Saniye</option>
+            <option value="45">45 Saniye</option>
+            <option value="60">60 Saniye</option>
+            <option value="75">75 Saniye</option>
+            <option value="90">90 Saniye</option>
+            <option value="120">120 Saniye</option>
+            <option value="180">180 Saniye</option>
+            <option value="240">240 Saniye</option>
+            <option value="300">300 Saniye</option>
+        </select>
     </div>
 
-    <!-- Grup OluÅŸtur ButonlarÄ± -->
+    <!-- Rastgele Ýsim Seç Butonu -->
     <div>
-        <button class="groupButton" onclick="createGroups(2)">2'li Grup OluÅŸtur</button>
-        <button class="groupButton" onclick="createGroups(3)">3'lÃ¼ Grup OluÅŸtur</button>
-        <button class="groupButton" onclick="createGroups(4)">4'lÃ¼ Grup OluÅŸtur</button>
+        <button id="randomButton" onclick="selectRandomName()">Rastgele Ýsim Seç</button>
     </div>
 
-    <!-- TakÄ±m OluÅŸtur ButonlarÄ± -->
+    <!-- Grup Oluþtur Butonlarý -->
     <div>
-        <button class="teamButton" onclick="createTeams(4)">4 TakÄ±m OluÅŸtur</button>
-        <button class="teamButton" onclick="createTeams(5)">5 TakÄ±m OluÅŸtur</button>
-        <button class="teamButton" onclick="createTeams(6)">6 TakÄ±m OluÅŸtur</button>
+        <button class="groupButton" onclick="createGroups(2)">2'li Grup Oluþtur</button>
+        <button class="groupButton" onclick="createGroups(3)">3'lü Grup Oluþtur</button>
+        <button class="groupButton" onclick="createGroups(4)">4'lü Grup Oluþtur</button>
     </div>
 
-    <!-- Temizle ve Ã‡Ä±kÄ±ÅŸ ButonlarÄ± -->
+    <!-- Takým Oluþtur Butonlarý -->
+    <div>
+        <button class="teamButton" onclick="createTeams(4)">4 Takým Oluþtur</button>
+        <button class="teamButton" onclick="createTeams(5)">5 Takým Oluþtur</button>
+        <button class="teamButton" onclick="createTeams(6)">6 Takým Oluþtur</button>
+    </div>
+
+    <!-- Temizle ve Çýkýþ Butonlarý -->
     <div>
         <button id="clearButton" onclick="clearList()">Temizle</button>
-        <button id="exitButton" onclick="exitApp()">Ã‡IKIÅž</button>
+        <button id="exitButton" onclick="exitApp()">ÇIKIÞ</button>
     </div>
 
-    <!-- SeÃ§ilen Ä°sim ve GruplarÄ±n GÃ¶sterileceÄŸi Alan -->
+    <!-- Seçilen Ýsim ve Gruplarýn Gösterileceði Alan -->
     <div id="selectedName"></div>
     <ul id="nameList"></ul>
     <div id="groupContainer" class="groupList"></div>
 
-    <script>
-        const names = ['ADAR Ã–ZKAYA', 'SALMAN S.K. SEYAM', 'ARAS KOZCA', 'BETÃœL KAYA', 'BARIÅž Ã‡AR', 
-                       'BELÄ°NAY CANÄ°KLÄ°', 'EFE ENSAR UTANÄžAÃ‡', 'ELÄ°F DEVA GÃœLERTAÅž', 'EMÄ°N ASAF KOLU', 
-                       'ERDEM AKCA', 'EYMEN ÃœLKÃœ', 'HÃœMEYRA AYÅžE Ã‡AR', 'Ä°KRA NÄ°SAN DALDAL', 
-                       'Ä°KRA SILA YALNIZ', 'KAYRA GÃ–KTEPE', 'YÄ°ÄžÄ°T ALÄ° LÄ°MONCU', 
-                       'LÃœTFÄ°YE NÄ°ÄžDA ERDEMÄ°R', 'MERVE DALLI', 'MUHAMMED ATABEY NÄ°ÅžANCI', 
-                       'MUHAMMED ENSAR DEÄžÄ°RMENCÄ°', 'NAÄ°M ALPARSLAN Ã–ZTÃœRK', 'POYRAZ MADENCÄ°', 
-                       'TUANA EBRAR DÃœNDAR', 'YÄ°ÄžÄ°T EREN', 'YUSUF TAHA BUDAK', 'ZÃœMRA HORASAN', 'ZENDA ROJ ACAR'];
-        let remainingNames = [...names];
+    <!-- Zil Sesi -->
+    <audio id="bellSound" src="bell.mp3"></audio>
 
-        // Rastgele isim seÃ§me fonksiyonu
+    <script>
+        const names = ['ADAR ÖZKAYA', 'SALMAN S.K. SEYAM', 'ARAS KOZCA', 'BETÜL KAYA', 'BARIÞ ÇAR', 
+                       'BELÝNAY CANÝKLÝ', 'EFE ENSAR UTANÐAÇ', 'ELÝF DEVA GÜLERTAÞ', 'EMÝN ASAF KOLU', 
+                       'ERDEM AKCA', 'EYMEN ÜLKÜ', 'HÜMEYRA AYÞE ÇAR', 'ÝKRA NÝSAN DALDAL', 
+                       'ÝKRA SILA YALNIZ', 'KAYRA GÖKTEPE', 'YÝÐÝT ALÝ LÝMONCU', 
+                       'LÜTFÝYE NÝÐDA ERDEMÝR', 'MERVE DALLI', 'MUHAMMED ATABEY NÝÞANCI', 
+                       'MUHAMMED ENSAR DEÐÝRMENCÝ', 'NAÝM ALPARSLAN ÖZTÜRK', 'POYRAZ MADENCÝ', 
+                       'TUANA EBRAR DÜNDAR', 'YÝÐÝT EREN', 'YUSUF TAHA BUDAK', 'ZÜMRA HORASAN', 'ZENDA ROJ ACAR'];
+        let remainingNames = [...names];
+        let intervalId = null;
+
+        function startInterval() {
+            const timeInterval = parseInt(document.getElementById('timeInterval').value, 10);
+            if (timeInterval > 0) {
+                intervalId = setInterval(selectRandomName, timeInterval * 1000);
+            }
+        }
+
+        function stopInterval() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        }
+
         function selectRandomName() {
             if (remainingNames.length > 0) {
                 const randomIndex = Math.floor(Math.random() * remainingNames.length);
@@ -159,12 +196,20 @@
                 listItem.innerText = selectedName;
                 document.getElementById('nameList').prepend(listItem);
                 remainingNames.splice(randomIndex, 1);
+                document.getElementById('bellSound').play(); // Zil sesi çal
             } else {
-                alert('TÃ¼m isimler seÃ§ildi!');
+                alert('Tüm isimler seçildi!');
+                stopInterval();
             }
         }
 
-        // Grup oluÅŸturma fonksiyonu
+        document.getElementById('timeInterval').addEventListener('change', function() {
+            stopInterval();
+            if (this.value > 0) {
+                startInterval();
+            }
+        });
+
         function createGroups(groupSize) {
             if (remainingNames.length < groupSize) {
                 alert(`En az ${groupSize} isim gereklidir!`);
@@ -180,7 +225,6 @@
             displayGroups(groups, `${groupSize}'li Gruplar`);
         }
 
-        // TakÄ±m oluÅŸturma fonksiyonu
         function createTeams(teamCount) {
             if (remainingNames.length < teamCount) {
                 alert(`En az ${teamCount} isim gereklidir!`);
@@ -194,10 +238,9 @@
                 teams[i % teamCount].push(shuffledNames[i]);
             }
 
-            displayGroups(teams, `${teamCount} TakÄ±m`);
+            displayGroups(teams, `${teamCount} Takým`);
         }
 
-        // GruplarÄ± veya takÄ±mlarÄ± ekranda gÃ¶sterme fonksiyonu
         function displayGroups(groups, title) {
             const groupContainer = document.getElementById('groupContainer');
             groupContainer.innerHTML = `<h3>${title}</h3>`;
@@ -219,7 +262,6 @@
             groupContainer.appendChild(container);
         }
 
-        // Diziyi karÄ±ÅŸtÄ±rma fonksiyonu
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -228,17 +270,17 @@
             return array;
         }
 
-        // Listeyi temizleme fonksiyonu
         function clearList() {
             remainingNames = [...names];
             document.getElementById('selectedName').innerText = '';
             document.getElementById('nameList').innerHTML = '';
             document.getElementById('groupContainer').innerHTML = '';
+            stopInterval();
             alert('Liste temizlendi!');
         }
 
-        // Uygulamadan Ã§Ä±kÄ±ÅŸ fonksiyonu
         function exitApp() {
+            stopInterval();
             window.close();
         }
     </script>
